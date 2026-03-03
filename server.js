@@ -1,40 +1,21 @@
 const express = require("express");
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.static("public"));
-
-/* Mood-Based Compliments */
-const moodCompliments = {
-  happy: "You make happiness look effortless ✨",
-  sad: "Even when you're sad, you're still the most beautiful soul 💛",
-  tired: "You deserve rest and a thousand gentle hugs 💤💕",
-  angry: "Even your anger has elegance in it 😌"
+git --version
+const compliments = {
+  happy: "You make normal days feel magical ✨",
+  sad: "Even when you're sad, you're still precious 💛",
+  tired: "You deserve rest and a thousand hugs 💤💕",
+  angry: "Even when you're mad, you're still adorable 😌"
 };
 
-/* Random Compliments */
-const randomCompliments = [
-  { text: "You're glowing like the moon tonight 🌙", image: "moon.jpg" },
-  { text: "You shine brighter than the stars ✨", image: "stars.jpg" },
-  { text: "You're as calm and beautiful as the ocean 🌊", image: "ocean.jpg" },
-  { text: "You bloom like the prettiest flower 🌸", image: "flower.jpg" },
-  { text: "You're sweeter than sunrise ☀️", image: "sunrise.jpg" }
-];
-
-/* Routes */
 app.post("/get-compliment", (req, res) => {
   const { mood } = req.body;
-  res.json({ message: moodCompliments[mood] });
+  res.json({ message: compliments[mood] });
 });
-
-app.get("/random-compliment", (req, res) => {
-  const random =
-    randomCompliments[Math.floor(Math.random() * randomCompliments.length)];
-  res.json(random);
-});
-
-/* IMPORTANT: Railway Fix */
-const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
